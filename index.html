@@ -1,10 +1,38 @@
 <!DOCTYPE html>
 <head>
-
+	<title>Controllo</title>
+	
+	<!-- Styles -->
+	<style>
+		.show-box {}
+			.show-box [data-controllo-component="controllee"] {
+				width:250px;
+				height:250px;
+				background:red;
+			}
+	</style>
+	
+	<!-- Load jQuery -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>  
+	
+	<!-- Load Controllo -->
+	<script src="js/controllo.js"></script>
+	
+	<!-- Do our initializing -->
+	<script>
+		$(document).ready(function(){
+			$('.show-box').controllo({
+				autoPrep:false
+			});
+		});
+	</script>
 </head>
 <body>
 	<h1>Controllo</h1>
-	<button data-controllo-component="controller" data-controllo-group="show-box">Show Box</button>
-	<div data-controllo-component="controllee" data-controllo-group="show-box"></div>
+	<div class="show-box">
+		<button data-controllo-component="controller" data-controllo-group="show-box">Show Box</button>
+		<div data-controllo-component="controllee" data-controllo-group="show-box"></div>
+	</div>
 </body>
 </html>
