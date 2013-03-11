@@ -44,15 +44,20 @@
 		
 		var defaultScreenExists = $targets.filter('[data-controllo-group='+defaultScreen+']').length;
 		
-		this.defaultScreenPrep = function(){
-			console.log('there is a default screen set!');
-			$(elem).find('[data-controllo-group='+defaultScreen+']').show().addClass('active');
-		}
-		
 		this.prep = function(){
-			var first = $controllers.first().attr('data-controllo-group');
+			
+			// If autoPrep is on, set first to first set of items
+			if (autoPrep == true) {
+				var first = $controllers.first().attr('data-controllo-group');
+			} 
+		
+			// If autoPrep is off and a default screen exists, set first screen to the default screen
+			if (autoPrep == false && defaultScreenExists !== 0) {
+				var first = defaultScreen
+			}
 			
 			$(elem).find('[data-controllo-group='+first+']').show().addClass('active');
+			
 		}
 		this.animate = function(trigger){
 			var $activeComponents = $targets.filter('.active'),
@@ -139,15 +144,15 @@
 		// Hide all targets
 		$targets.hide();
 		
-		// If autoPrep is on, show default screen
-		if (autoPrep == true) {
-			this.prep();
-		} 
-		
-		// If autoPrep is off and a default screen exists, show default screen
-		if (autoPrep == false && defaultScreenExists !== 0) {
-			this.defaultScreenPrep();
-		}
+		// // If autoPrep is on, show default screen
+// 		if (autoPrep == true) {
+// 			this.prep();
+// 		} 
+// 		
+// 		// If autoPrep is off and a default screen exists, show default screen
+// 		if (autoPrep == false && defaultScreenExists !== 0) {
+// 			this.defaultScreenPrep();
+// 		}
 		
 		// Init triggers
 		this.setTrigger();
