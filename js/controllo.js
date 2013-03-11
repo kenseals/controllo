@@ -49,12 +49,12 @@
 			$(elem).find('[data-controllo-group='+defaultScreen+']').show().addClass('active');
 		}
 		
-		this.screenPrep = function(){
+		this.prep = function(){
 			var first = $controllers.first().attr('data-controllo-group');
 			
 			$(elem).find('[data-controllo-group='+first+']').show().addClass('active');
 		}
-		this.screenFade = function(trigger){
+		this.animate = function(trigger){
 			var $activeComponents = $targets.filter('.active'),
 				$incomingComponents = $targets.filter('[data-controllo-group='+trigger+']');
 				
@@ -109,9 +109,9 @@
 			var $context = context;
 			var $triggerID = $context.attr('data-controllo-group');
 			
-			obj.screenFade($triggerID);
+			obj.animate($triggerID);
 		}
-		this.screenTrigger = function(){	
+		this.setTrigger = function(){	
 			if (config.click == true) {
 				$controllers.click(function(){
 					$activeController = $controllers.filter('.active');
@@ -141,7 +141,7 @@
 		
 		// If autoPrep is on, show default screen
 		if (autoPrep == true) {
-			this.screenPrep();
+			this.prep();
 		} 
 		
 		// If autoPrep is off and a default screen exists, show default screen
@@ -150,7 +150,7 @@
 		}
 		
 		// Init triggers
-		this.screenTrigger();
+		this.setTrigger();
 	  };
 
 	  $.fn.controllo = function(options){
