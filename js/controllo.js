@@ -30,6 +30,14 @@
 			defaultScreen = config.defaultScreen,
 			autoPrep = config.autoPrep;	
 			
+			
+		// If autoPrep is off
+		if (autoPrep == false) {
+			console.log('autoPrep is off');
+				
+			var placeholderControllee = $(elem).append('<div data-controllo-component="controllee" data-controllo-group="controllo-placeholder" class="active">');
+		}
+			
 		if ($targets == undefined) {
 			var $targets = $(elem).find('[data-controllo-component|="controllee"]');
 		} else {
@@ -53,8 +61,12 @@
 		
 			// If autoPrep is off and a default screen exists, set first screen to the default screen
 			if (autoPrep == false && defaultScreenExists !== 0) {
-				var first = defaultScreen
+				var first = defaultScreen;
+				
+				$placeholderControllee.remove();
 			}
+			
+			if (autoPrep == false)
 			
 			$(elem).find('[data-controllo-group='+first+']').show().addClass('active');
 			
@@ -99,13 +111,6 @@
 				}
 			}	
 			
-			// If auto prep is turned off and there is no default screen present, set an active class so animations will run
-			if (autoPrep == false && defaultScreenExists == 0) {
-				var first = $controllers.first().attr('data-controllo-group');
-			
-				$(elem).find('[data-controllo-group='+first+']').show().addClass('active');
-			}
-			
 			// Run animations!
 			setAnimation($activeComponents, $incomingComponents);
 			
@@ -144,15 +149,8 @@
 		// Hide all targets
 		$targets.hide();
 		
-		// // If autoPrep is on, show default screen
-// 		if (autoPrep == true) {
-// 			this.prep();
-// 		} 
-// 		
-// 		// If autoPrep is off and a default screen exists, show default screen
-// 		if (autoPrep == false && defaultScreenExists !== 0) {
-// 			this.defaultScreenPrep();
-// 		}
+		// Prep
+		this.prep();
 		
 		// Init triggers
 		this.setTrigger();
@@ -172,4 +170,4 @@
 	      element.data('controllo', controllo);
 	    });
 	  };
-})(jQuery);	
+})(jQuery);
